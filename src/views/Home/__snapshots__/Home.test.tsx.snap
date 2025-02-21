@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render 1`] = `
+<div>
+  <div
+    class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row css-smhp44-MuiGrid2-root"
+  >
+    <div
+      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-column MuiGrid2-grid-xs-10 MuiGrid2-grid-md-8 MuiGrid2-spacing-xs-4 css-7pw7xi-MuiGrid2-root"
+    >
+      <div
+        class="MuiGrid2-root MuiGrid2-direction-xs-row css-1mgi31c-MuiGrid2-root"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom css-uynfxu-MuiTypography-root"
+        >
+          Confidently give feedback that empowers others and strengthens relationships.
+        </h3>
+        <p
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1f9xtph-MuiTypography-root"
+        >
+          If you’re feeling unsure, anxious, or stuck about delivering constructive feedback, this is the place to find clarity, tools, and support. Together, we’ll turn your fears into confidence and your feedback into a positive force for growth.
+        </p>
+      </div>
+      <div
+        class="MuiGrid2-root MuiGrid2-direction-xs-row css-1mgi31c-MuiGrid2-root"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-79zo2g-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
