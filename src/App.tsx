@@ -1,11 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 import Home from "./views/Home";
+import GatherInformation from "./views/GatherInformation";
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   return isPlaying ? (
-    <p>Playing</p>
+    <GatherInformation />
   ) : (
     <Home
       onStart={() => {

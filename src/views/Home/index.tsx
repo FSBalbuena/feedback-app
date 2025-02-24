@@ -2,6 +2,8 @@ import Grid from "@mui/material/Grid2";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useIsMobile from "../../hooks/useIsMobile";
+import { Home as copyText } from "../../data/copy";
+
 type Props = {
   onStart: () => void;
 };
@@ -24,21 +26,17 @@ function Home({ onStart }: Props) {
       >
         <Grid textAlign={"center"}>
           <Typography variant={isMobile ? "h5" : "h3"} gutterBottom>
-            Confidently give feedback that empowers others and strengthens
-            relationships.
+            {copyText.TITLE}
           </Typography>
           {isMobile ? null : (
             <Typography component={"p"} variant="h5" gutterBottom>
-              If you’re feeling unsure, anxious, or stuck about delivering
-              constructive feedback, this is the place to find clarity, tools,
-              and support. Together, we’ll turn your fears into confidence and
-              your feedback into a positive force for growth.
+              {copyText.DESCRIPTION}
             </Typography>
           )}
         </Grid>
         <Grid textAlign={"center"}>
           <Button variant="contained" size="large" onClick={onStart}>
-            Get Started
+            {copyText.START_BUTTON}
           </Button>
         </Grid>
       </Grid>

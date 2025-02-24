@@ -1,5 +1,6 @@
 import Home from "./index";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { Home as copyText } from "../../data/copy";
 
 const onStart = jest.fn();
 const DEFAULT_PROPS = {
@@ -10,9 +11,7 @@ describe("Home", () => {
     it("should render the correct Title", () => {
       render(<Home {...DEFAULT_PROPS} />);
       const title = screen.getByRole("heading");
-      expect(title).toHaveTextContent(
-        "Confidently give feedback that empowers others and strengthens relationships."
-      );
+      expect(title).toHaveTextContent(copyText.TITLE);
     });
     it("should render a description", () => {
       render(<Home {...DEFAULT_PROPS} />);
