@@ -40,17 +40,19 @@ const moveToLastQuestion = () => {
   });
 };
 
+const onGetFeedback = jest.fn();
+const DEFAULT_PROPS = { onGetFeedback };
 describe("GatherInformation", () => {
   describe("on Render", () => {
     it("should render", () => {
-      const { container } = render(<GatherInformation />);
+      const { container } = render(<GatherInformation {...DEFAULT_PROPS} />);
       expect(container).toMatchSnapshot();
     });
   });
   describe("behavior", () => {
     describe("when user is in the first Step", () => {
       it("should show prev button as disabled", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const button = screen.getByRole("button", {
           name: copyText.PREV_BUTTON,
         });
@@ -60,7 +62,7 @@ describe("GatherInformation", () => {
     });
     describe("when user has not written an answer", () => {
       it("should show next button as disabled", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const textArea = screen.getByRole("textbox", {
           name: copyText.TEXT_FIELD_LABEL,
         });
@@ -75,7 +77,7 @@ describe("GatherInformation", () => {
     });
     describe("when user is not in the first Step", () => {
       it("should show prev button as enabled", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const firstAnswer = "first answer";
         writeAnswer(firstAnswer);
         clickOnButton(copyText.NEXT_BUTTON);
@@ -90,7 +92,7 @@ describe("GatherInformation", () => {
     });
     describe("when user is in the last Step", () => {
       it("should not show next button", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         moveToLastQuestion();
         const button = screen.queryByRole("button", {
           name: copyText.NEXT_BUTTON,
@@ -98,7 +100,7 @@ describe("GatherInformation", () => {
         expect(button).toBeNull();
       });
       it("should show get feedback button  as disabled", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         moveToLastQuestion();
         const button = screen.getByRole("button", {
           name: copyText.GET_FEEDBACK_BUTTON,
@@ -108,7 +110,7 @@ describe("GatherInformation", () => {
       });
       describe("when user has written an answer", () => {
         it("should show get feedback button enabled", () => {
-          render(<GatherInformation />);
+          render(<GatherInformation {...DEFAULT_PROPS} />);
           moveToLastQuestion();
           writeAnswer("test answer");
           const button = screen.getByRole("button", {
@@ -124,13 +126,13 @@ describe("GatherInformation", () => {
     describe("when user types on text field", () => {
       it("should update answer", () => {
         const testAnswer = "Test Answer";
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         writeAnswer(testAnswer);
       });
     });
     describe("when user clicks on next button", () => {
       it("should update the title", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const title = screen.getByRole("heading");
         expect(title).toBeInTheDocument();
         expect(title).toHaveTextContent(steps[0].question);
@@ -141,7 +143,7 @@ describe("GatherInformation", () => {
         });
       });
       it("should update the description", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const description = screen.getByRole("paragraph");
         expect(description).toBeInTheDocument();
         expect(description).toHaveTextContent(steps[0].hint);
@@ -153,7 +155,7 @@ describe("GatherInformation", () => {
       });
       it("should update the answer", () => {
         const testAnswer = "Test Answer";
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         writeAnswer(testAnswer);
         clickOnButton(copyText.NEXT_BUTTON);
         waitFor(() => {
@@ -166,7 +168,7 @@ describe("GatherInformation", () => {
     });
     describe("when user clicks on prev field", () => {
       it("should update the title", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const title = screen.getByRole("heading");
         expect(title).toHaveTextContent(steps[0].question);
         completeOneQuestion("complete first");
@@ -180,7 +182,7 @@ describe("GatherInformation", () => {
         });
       });
       it("should update the description", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const description = screen.getByRole("paragraph");
         expect(description).toHaveTextContent(steps[0].hint);
         completeOneQuestion("complete first");
@@ -193,7 +195,7 @@ describe("GatherInformation", () => {
         });
       });
       it("should update with the previous answer", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         const firstAnswer = "complete first";
         const textArea = screen.getByRole("textbox", {
           name: copyText.TEXT_FIELD_LABEL,
@@ -210,11 +212,12 @@ describe("GatherInformation", () => {
     });
     describe("when user clicks on get Feedback", () => {
       it("should call service", () => {
-        render(<GatherInformation />);
+        render(<GatherInformation {...DEFAULT_PROPS} />);
         moveToLastQuestion();
         writeAnswer(steps[steps.length - 1].id);
+        expect(onGetFeedback).not.toHaveBeenCalled();
         clickOnButton(copyText.GET_FEEDBACK_BUTTON);
-        //actual action is missing
+        expect(onGetFeedback).toHaveBeenCalled();
       });
     });
   });

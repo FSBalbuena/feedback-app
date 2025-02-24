@@ -9,10 +9,14 @@ import GetAppIcon from "@mui/icons-material/GetApp";
 import Typography from "@mui/material/Typography";
 import { steps } from "../../data/steps";
 import { GatherInformation as copyText } from "../../data/copy";
+import { UseMutateFunction } from "@tanstack/react-query";
 
 type Answers = { [key: string]: string };
 
-function GatherInformation() {
+type Props = {
+  onGetFeedback: UseMutateFunction;
+};
+function GatherInformation({ onGetFeedback }: Props) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [currentAnswer, setCurrentAnswer] = useState("");
@@ -55,12 +59,11 @@ function GatherInformation() {
     setCurrentStep((previousCurrentStep) => previousCurrentStep - 1);
   }, [onMoveToAnswer, currentStep]);
 
-  const onGetFeedback = () => {
+  const handleFeedbackSubmit = async () => {
     const answerId = steps[currentStep].id;
     const newAnswers = { ...answers, [answerId]: currentAnswer };
     setAnswers(newAnswers);
-    console.log(newAnswers);
-    //should call service
+    onGetFeedback(newAnswers);
   };
   //--- END Buttons Actions ---//
 
@@ -94,7 +97,10 @@ function GatherInformation() {
 
         {isLastStep ? (
           <Tooltip title={copyText.GET_FEEDBACK_BUTTON}>
-            <IconButton disabled={!currentAnswer} onClick={onGetFeedback}>
+            <IconButton
+              disabled={!currentAnswer}
+              onClick={handleFeedbackSubmit}
+            >
               <GetAppIcon />
             </IconButton>
           </Tooltip>
