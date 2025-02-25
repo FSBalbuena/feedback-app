@@ -28,7 +28,8 @@
       "@views/*": ["./src/views/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@querys/*": ["./src/querys/*"],
-      "@data/*": ["./src/data/*"]
+      "@data/*": ["./src/data/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": ["src"]

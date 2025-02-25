@@ -9,15 +9,14 @@ import GetAppIcon from "@mui/icons-material/GetApp";
 import Typography from "@mui/material/Typography";
 import { steps } from "@data/steps";
 import { GatherInformation as copyText } from "@data/copy";
-
-type Answers = { [key: string]: string };
+import { Intentions } from "@/types/common";
 
 type Props = {
-  onGetFeedback: (answers: Answers) => void;
+  onGetFeedback: (answers: Intentions) => void;
 };
 function GatherInformation({ onGetFeedback }: Props) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<Answers>({});
+  const [answers, setAnswers] = useState<Intentions>({});
   const [currentAnswer, setCurrentAnswer] = useState("");
 
   const isLastStep = currentStep === steps.length - 1;

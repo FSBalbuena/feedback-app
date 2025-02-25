@@ -9,7 +9,7 @@ function App() {
   const { mutate, data, isPending } = useCreateFeedback();
   return isPlaying ? (
     <>
-      <GatherInformation onGetFeedback={mutate as () => void} />
+      <GatherInformation onGetFeedback={mutate} />
       {isPending ? "LOADING" : null}
       {data ? JSON.stringify(data) : null}
     </>
