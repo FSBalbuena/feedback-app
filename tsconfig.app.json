@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -21,7 +22,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@views/*": ["./src/views/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@querys/*": ["./src/querys/*"],
+      "@data/*": ["./src/data/*"],
+      "@types/*": ["./src/types/*"]
+    }
   },
   "include": ["src"]
 }
