@@ -22,7 +22,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@views/*": ["./src/views/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@querys/*": ["./src/querys/*"],
+      "@data/*": ["./src/data/*"]
+    }
   },
-  "include": ["src", "vite-env.d.ts"]
+  "include": ["src"]
 }

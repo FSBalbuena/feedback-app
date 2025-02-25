@@ -1,6 +1,6 @@
 import GatherInformation from ".";
-import { GatherInformation as copyText } from "../../data/copy";
-import { steps } from "../../data/steps";
+import { GatherInformation as copyText } from "@data/copy";
+import { steps } from "@data/steps";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const writeAnswer = (answer: string) => {

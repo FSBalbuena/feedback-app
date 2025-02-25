@@ -1,6 +1,6 @@
 import Home from "./index";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Home as copyText } from "../../data/copy";
+import { Home as copyText } from "@data/copy";
 
 const onStart = jest.fn();
 const DEFAULT_PROPS = {

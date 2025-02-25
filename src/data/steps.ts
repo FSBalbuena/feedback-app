@@ -37,3 +37,10 @@ export const steps = [
     hint: "Is your goal to improve performance, strengthen communication, or something else?",
   },
 ];
+
+export const stepsIDs = steps.map((step) => step.id);
+
+export const questionsAndHints = steps.reduce((text, step) => {
+  const { id, question, hint } = step;
+  return text + `- ${id}: ${question} --> ${hint}\n`;
+}, "");

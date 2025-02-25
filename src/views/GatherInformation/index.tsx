@@ -7,14 +7,13 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import Typography from "@mui/material/Typography";
-import { steps } from "../../data/steps";
-import { GatherInformation as copyText } from "../../data/copy";
-import { UseMutateFunction } from "@tanstack/react-query";
+import { steps } from "@data/steps";
+import { GatherInformation as copyText } from "@data/copy";
 
 type Answers = { [key: string]: string };
 
 type Props = {
-  onGetFeedback: UseMutateFunction;
+  onGetFeedback: (answers: Answers) => void;
 };
 function GatherInformation({ onGetFeedback }: Props) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -59,7 +58,7 @@ function GatherInformation({ onGetFeedback }: Props) {
     setCurrentStep((previousCurrentStep) => previousCurrentStep - 1);
   }, [onMoveToAnswer, currentStep]);
 
-  const handleFeedbackSubmit = async () => {
+  const handleFeedbackSubmit = () => {
     const answerId = steps[currentStep].id;
     const newAnswers = { ...answers, [answerId]: currentAnswer };
     setAnswers(newAnswers);
