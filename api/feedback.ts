@@ -1,7 +1,10 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import OpenAI from "openai";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import { CohereClient } from "cohere-ai";
+
+const client = new CohereClient({
+  token: "0jowWMuffPhdVg0JDBy6o9HpAGMPKepjDnxTzhAf",
+});
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "POST") {
@@ -12,16 +15,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(400).json({ error: "Intentions are required" });
       }
 
-      const chatCompletion = await openai.chat.completions.create({
-        model: "gpt-4o",
-        store: false,
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 150,
+      const chatCompletion = await client.chat({
+        message: prompt.message,
+        model: "command-r-08-2024",
+        preamble: prompt.preamble,
       });
 
-      return res
-        .status(200)
-        .json({ reply: chatCompletion.choices[0]?.message?.content });
+      return res.status(200).json({ feedback: chatCompletion.text });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Something went wrong creating feedback" });
