@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/configs/apiClient";
-import { questionsAndHints, stepsIDs } from "@data/steps";
+import { questionsAndHints, stepsIDs } from "@/data/steps";
 import { Intentions } from "@/types/common";
 
-const makePrompt = (intentions: Intentions) => {
+export const makePrompt = (intentions: Intentions) => {
   const intentionsToAnswers = stepsIDs.reduce(
     (text: string, id: string) => text + `-${id}: ${intentions[id]}`
   );
@@ -41,11 +41,7 @@ export const useCreateFeedback = () => {
     mutationFn: (intentions: Intentions) => {
       return apiClient
         .post("/feedback", { prompt: makePrompt(intentions) })
-        .then((res) => res.data?.feedback)
-        .catch((err) => {
-          console.log(err);
-          return "Something went wrong creating feedback";
-        });
+        .then((res) => res.data?.feedback);
     },
   });
 };

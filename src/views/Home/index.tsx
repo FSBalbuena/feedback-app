@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid2";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import useIsMobile from "@hooks/useIsMobile";
-import { Home as copyText } from "@data/copy";
+import useIsMobile from "@/hooks/useIsMobile";
+import { Home as copyText } from "@/data/copy";
 
 type Props = {
   onStart: () => void;
