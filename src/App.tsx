@@ -1,24 +1,27 @@
 import "./App.css";
 import { useState } from "react";
-import Home from "@views/Home";
-import GatherInformation from "@views/GatherInformation";
-import { useCreateFeedback } from "@querys/index";
+import Home from "@/views/Home";
+import GatherInformation from "@/views/GatherInformation";
+import { useCreateFeedback } from "@/querys/index";
+import Feedback from "@/views/Feedback";
+import FeedbackSkeleton from "@/views/Feedback/FeedbackSkeleton";
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const { mutate, data, isPending } = useCreateFeedback();
-  return isPlaying ? (
-    <>
-      <GatherInformation onGetFeedback={mutate} />
-      {isPending ? "LOADING" : null}
-      {data ? JSON.stringify(data) : null}
-    </>
-  ) : (
+  const [showFeedbackAdviser, setShowFeedbackAdviser] = useState(false);
+  const { mutate, data, isPending, reset } = useCreateFeedback();
+
+  return !showFeedbackAdviser ? (
     <Home
       onStart={() => {
-        setIsPlaying(true);
+        setShowFeedbackAdviser(true);
       }}
     />
+  ) : isPending ? (
+    <FeedbackSkeleton />
+  ) : data ? (
+    <Feedback feedbackAdvice={data} onRestart={reset} />
+  ) : (
+    <GatherInformation onGetFeedback={mutate} />
   );
 }
 

@@ -1,18 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/configs/apiClient";
-import { questionsAndHints, stepsIDs } from "@data/steps";
+import { questionsAndHints, stepsIDs } from "@/data/steps";
 import { Intentions } from "@/types/common";
 
-const makePrompt = (intentions: Intentions) => {
+export const makePrompt = (intentions: Intentions) => {
   const intentionsToAnswers = stepsIDs.reduce(
     (text: string, id: string) => text + `-${id}: ${intentions[id]}`
   );
-  return `You are a helpful and empathetic feedback consultant. Your goal is to help individuals provide constructive feedback that empowers the recipient to grow and thrive. you ask them the next questions to understand the givers pint of views.
+  const preamble = `You are a helpful and empathetic feedback consultant. Your goal is to help individuals provide constructive feedback that empowers the recipient to grow and thrive. you ask them the next questions to understand the givers pint of views.
  <TOPIC>: <QUESTION> --> <DESCRIPTION>:
 ${questionsAndHints}
 
-and this are their answers to each topic:
-${intentionsToAnswers}
+--------------------------------
 
 Once the user provides this information, you can:
 1. Analyze the Input: Identify key themes (e.g., specific behaviors, impact, desired changes).
@@ -27,9 +26,14 @@ Once the user provides this information, you can:
  2.8 Please ensure your feedback is constructive, respectful, and helpful for the recipient’s growth. 
 3. Offer Delivery Tips: Suggest the best way to deliver the feedback based on the tone and context.
 
-please generate your content in raw markdown as a plain text.
+--------------------------------
+you need to write your response as raw markdown
 
 `;
+  const message = `Hi here are the answers to your questions:
+${intentionsToAnswers}`;
+
+  return { preamble, message };
 };
 
 export const useCreateFeedback = () => {
@@ -37,7 +41,7 @@ export const useCreateFeedback = () => {
     mutationFn: (intentions: Intentions) => {
       return apiClient
         .post("/feedback", { prompt: makePrompt(intentions) })
-        .then((res) => res.data);
+        .then((res) => res.data?.feedback);
     },
   });
 };

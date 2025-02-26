@@ -24,12 +24,7 @@
     "noUncheckedSideEffectImports": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@views/*": ["./src/views/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@querys/*": ["./src/querys/*"],
-      "@data/*": ["./src/data/*"],
-      "@types/*": ["./src/types/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]

@@ -7,8 +7,8 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import Typography from "@mui/material/Typography";
-import { steps } from "@data/steps";
-import { GatherInformation as copyText } from "@data/copy";
+import { steps } from "@/data/steps";
+import { GatherInformation as copyText } from "@/data/copy";
 import { Intentions } from "@/types/common";
 
 type Props = {

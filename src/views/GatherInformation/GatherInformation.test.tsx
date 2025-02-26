@@ -1,9 +1,9 @@
 import GatherInformation from ".";
-import { GatherInformation as copyText } from "@data/copy";
-import { steps } from "@data/steps";
+import { GatherInformation as copyText } from "@/data/copy";
+import { steps } from "@/data/steps";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-const writeAnswer = (answer: string) => {
+export const writeAnswer = (answer: string) => {
   const textArea = screen.getByRole("textbox", {
     name: copyText.TEXT_FIELD_LABEL,
   });
@@ -16,18 +16,18 @@ const writeAnswer = (answer: string) => {
   });
 };
 
-const clickOnButton = (buttonIdentifier: string) => {
+export const clickOnButton = (buttonIdentifier: string) => {
   const button = screen.getByRole("button", { name: buttonIdentifier });
   expect(button).toBeInTheDocument();
   fireEvent.click(button as Element);
 };
 
-const completeOneQuestion = (answer: string) => {
+export const completeOneQuestion = (answer: string) => {
   writeAnswer(answer);
   clickOnButton(copyText.NEXT_BUTTON);
 };
 
-const moveToLastQuestion = () => {
+export const moveToLastQuestion = () => {
   steps.forEach((step, index) => {
     if (index === steps.length - 1) return;
     completeOneQuestion(step.id);
